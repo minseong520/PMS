@@ -17,7 +17,15 @@ public class indexController {
 	public String about()	{
 		System.out.println("인덱스 페이지 입니다...");
 		return "about";
+	}
 
-		
+	@GetMapping("/board")
+	public String board()	{
+		System.out.println("게시판입니다.");
+		return "board";		
+
+	
 	}
 }
+
+

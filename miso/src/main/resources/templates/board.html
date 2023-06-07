@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Content</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Create Content</h2>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea class="form-control" id="content" rows="5" placeholder="Enter content" required></textarea>
+            </div>
+            <button type="button" id="saveBtn" class="btn btn-primary">Create</button>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script>
+		var xhr = new XMLHttpRequest();
+	    xhr.open('GET', '/listBoard', true);
+	    xhr.setRequestHeader('Content-Type', 'application/json');
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	            // Request was successful
+	            console.log(xhr.responseText);
+	        }
+	    };
+	    xhr.send();
+	    
+	    
+	document.getElementById('saveBtn').addEventListener('click', function(event) {
+	    event.preventDefault(); // Prevent the default form submission
+	
+	    // Get form input values
+	    var title = document.getElementById('title').value;
+	    var content = document.getElementById('content').value;
+	
+	    // Create the map object with form data
+	    var data = {
+	        title: title,
+	        content: content
+	    };
+	
+	    // Send the data using AJAX
+		var xhr = new XMLHttpRequest();
+	    xhr.open('POST', '/saveBoard', true);
+	    xhr.setRequestHeader('Content-Type', 'application/json');
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	            // Request was successful
+	            console.log(xhr.responseText);
+	        }
+	    };
+	    xhr.send(JSON.stringify(data));
+	});
+	</script>
+</body>
+</html>
